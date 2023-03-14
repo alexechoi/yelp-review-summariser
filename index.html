@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yelp Reviews Scraper</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="wrapper">
+		<nav class="navbar">
+		  <div class="navbar-left">
+		    <img src="https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_design_cdn/7ef71bf77a33/assets/img/brand/logo_desktop.svg">
+		  </div>
+		  <div class="navbar-right">
+		    <h1 class="logo-text">Yelp Reviews Scraper</h1>
+		  </div>
+		</nav>
+
+		  <p>Please note that webpage selection is disabled for demonstration purposes</p>
+		  <p class="prompt-text">Paste a Yelp restaurant link below to view its reviews:</p>
+		  <input class="input-field" type="text" placeholder="Enter Yelp link here..." readonly value="https://www.yelp.com/biz/the-victoria-paddington">
+		  <button class="view-btn" id="view-keywords-btn">View Keywords</button>
+		  <div class="keywords-container" style="display: none;">
+		    <h2 class="keywords-heading">Top 20 Keywords</h2>
+		    <ul class="keywords-list"></ul>
+	  </div>
+	</div>
+
+  <script>
+    const keywords = [
+      {text: 'food', count: 8},
+      {text: 'dinner', count: 6},
+      {text: 'area', count: 6},
+      {text: 'table', count: 6},
+      {text: 'very', count: 6},
+      {text: 'first', count: 5},
+      {text: 'from', count: 5},
+      {text: 'there', count: 5},
+      {text: 'lamb', count: 5},
+      {text: 'staff', count: 5},
+      {text: 'some', count: 5},
+      {text: 'enjoyed', count: 5},
+      {text: 'made', count: 4},
+      {text: 'back', count: 4},
+      {text: 'here', count: 4},
+      {text: 'dining', count: 4},
+      {text: 'away', count: 4},
+      {text: 'highly', count: 4},
+      {text: 'time', count: 4},
+      {text: 'upstairs', count: 4},
+    ];
+
+    const keywordsList = document.querySelector('.keywords-list');
+    const viewKeywordsBtn = document.getElementById('view-keywords-btn');
+    const keywordsContainer = document.querySelector('.keywords-container');
+
+    viewKeywordsBtn.addEventListener('click', () => {
+      // show the keywords container
+      keywordsContainer.style.display = 'block';
+
+      // populate the keywords list
+      keywords.forEach((keyword, index) => {
+        // create a new list item
+        const li = document.createElement('li');
+        li.classList.add('keyword-item');
+
+        // create a span for the keyword text
+        const textSpan = document.createElement('span');
+        textSpan.classList.add('keyword-text');
+        textSpan.textContent = keyword.text;
+
+        // create a span for the keyword count
+        const countSpan = document.createElement('span');
+        countSpan.classList.add('keyword-count');
+        countSpan.textContent = keyword.count;
+
+        // add the spans to the list item
+        li.appendChild(textSpan);
+        li.appendChild(countSpan);
+
+        // add a class for the top 5 keywords
+           if (index < 5) {
+      li.classList.add('top-keyword');
+    }
+
+    // add the list item to the keywords list
+    keywordsList.appendChild(li);
+  });
+});
+
+</script>
+</body>
+</html>
